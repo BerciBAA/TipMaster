@@ -42,7 +42,7 @@ public class WebSecurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authz -> authz
-                        .requestMatchers("/auth/login", "/auth/register", "/test/all").permitAll()
+                        .requestMatchers("/auth/login", "/auth/register", "/test/all", "/auth/refresh-token").permitAll()
                         .requestMatchers("/**").authenticated()
                 )
                 .sessionManagement(session -> session
