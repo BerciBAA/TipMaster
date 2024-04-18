@@ -2,6 +2,7 @@ package com.backend.StudentTipMaster.service;
 
 import com.backend.StudentTipMaster.entity.RefreshToken;
 import com.backend.StudentTipMaster.entity.User;
+import com.backend.StudentTipMaster.handler.TokenNotFoundException;
 import com.backend.StudentTipMaster.repository.RefreshTokenRepository;
 import com.backend.StudentTipMaster.repository.UserRepository;
 import com.backend.StudentTipMaster.response.LoginResponse;
@@ -41,7 +42,7 @@ public class RefreshTokenService {
         return refreshTokenRepository.save(refreshToken);
     }
 
-    public LoginResponse verifyRefreshToken(RefreshTokenRequest refreshTokenRequest){
+    public LoginResponse verifyRefreshToken(RefreshTokenRequest refreshTokenRequest) throws TokenNotFoundException {
         return findByToken(refreshTokenRequest.getToken())
                 .map(this::verifyExpiration)
                 .map(RefreshToken::getUser)
@@ -51,7 +52,7 @@ public class RefreshTokenService {
                             .accessToken(accessToken)
                             .refreshToken(refreshTokenRequest.getToken())
                             .build();
-                }).orElseThrow(() ->new RuntimeException("A Refresh token nincs az adatbázisban!"));
+                }).orElseThrow(() ->new TokenNotFoundException("A Refresh token nincs az adatbázisban!"));
     }
 
     private void invalidateRefreshToken(User user){

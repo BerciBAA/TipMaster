@@ -28,6 +28,13 @@ public class GlobalExceptionHandler {
                 .build());
     }
 
+    @ExceptionHandler(TokenNotFoundException.class)
+    public ResponseEntity<ExceptionResponse> handleTokenNotFoundException(UsernameNotFoundException ex, WebRequest request) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ExceptionResponse.builder()
+                .exceptionMessage(ex.getMessage())
+                .build());
+    }
+
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<ExceptionResponse> handleBadCredentialsException(BadCredentialsException ex, WebRequest request) {
         String errorResponse = "Hibás felhasználónév vagy jelszó. Kérjük, próbálja meg újra!";

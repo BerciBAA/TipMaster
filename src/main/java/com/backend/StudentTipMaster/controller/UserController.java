@@ -1,6 +1,7 @@
 package com.backend.StudentTipMaster.controller;
 
 
+import com.backend.StudentTipMaster.handler.TokenNotFoundException;
 import com.backend.StudentTipMaster.request.LoginRequest;
 import com.backend.StudentTipMaster.request.RefreshTokenRequest;
 import com.backend.StudentTipMaster.request.RegisterRequest;
@@ -40,7 +41,7 @@ public class UserController {
     }
 
     @PostMapping("/refresh-token")
-    public ResponseEntity<LoginResponse> refreshToken(@Valid @RequestBody RefreshTokenRequest refreshTokenRequest) {
+    public ResponseEntity<LoginResponse> refreshToken(@Valid @RequestBody RefreshTokenRequest refreshTokenRequest) throws TokenNotFoundException {
         return ResponseEntity.status(HttpStatus.OK).body(refreshTokenService.verifyRefreshToken(refreshTokenRequest));
     }
 }
