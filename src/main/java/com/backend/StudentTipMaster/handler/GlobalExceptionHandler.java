@@ -29,7 +29,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(TokenNotFoundException.class)
-    public ResponseEntity<ExceptionResponse> handleTokenNotFoundException(UsernameNotFoundException ex, WebRequest request) {
+    public ResponseEntity<ExceptionResponse> handleTokenNotFoundException(TokenNotFoundException ex, WebRequest request) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ExceptionResponse.builder()
                 .exceptionMessage(ex.getMessage())
                 .build());

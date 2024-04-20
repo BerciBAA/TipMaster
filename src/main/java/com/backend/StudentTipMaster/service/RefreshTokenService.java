@@ -50,9 +50,9 @@ public class RefreshTokenService {
                     String accessToken = jwtService.GenerateToken(user.getUsername());
                     return LoginResponse.builder()
                             .accessToken(accessToken)
-                            .refreshToken(refreshTokenRequest.getToken())
+                            .refreshToken(createRefreshToken(user.getUsername()).getToken())
                             .build();
-                }).orElseThrow(() ->new TokenNotFoundException("A Refresh token nincs az adatbázisban!"));
+                }).orElseThrow(() ->new TokenNotFoundException("A refresh token nem létezik!"));
     }
 
     private void invalidateRefreshToken(User user){
