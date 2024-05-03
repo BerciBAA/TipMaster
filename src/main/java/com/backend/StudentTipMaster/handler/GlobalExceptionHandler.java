@@ -28,6 +28,13 @@ public class GlobalExceptionHandler {
                 .build());
     }
 
+    @ExceptionHandler(RoomNameAlreadyExitsException.class)
+    public ResponseEntity<ExceptionResponse> handleRoomNameAlreadyExitsException(RoomNameAlreadyExitsException ex, WebRequest request) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(ExceptionResponse.builder()
+                .exceptionMessage(ex.getMessage())
+                .build());
+    }
+
     @ExceptionHandler(TokenNotFoundException.class)
     public ResponseEntity<ExceptionResponse> handleTokenNotFoundException(TokenNotFoundException ex, WebRequest request) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ExceptionResponse.builder()
