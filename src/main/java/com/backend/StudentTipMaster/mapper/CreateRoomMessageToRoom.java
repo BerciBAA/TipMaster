@@ -28,12 +28,12 @@ public class CreateRoomMessageToRoom implements Converter<CreateRoomMessage, Roo
         CreateRoomMessage source = mappingContext.getSource();
         Room destination = new Room();
         destination.setRoomName(source.getRoomName());
-        if (source.getUserId() != null){
+        if (source.getUserId() != null && !source.getUserId().toString().isEmpty()){
             User user = userRepository.findById(source.getUserId()).orElseThrow(() -> new UsernameNotFoundException("A felhasználó nem található."));
             destination.setOwner(user.getUsername());
             destination.setUsers(List.of(user));
         }
-        if(source.getTemporaryUsername() != null){
+        else if(source.getTemporaryUsername() != null && !source.getTemporaryUsername().isEmpty()){
             destination.setOwner(source.getTemporaryUsername());
             destination.setTemporaryUsers(List.of(source.getTemporaryUsername()));
         }

@@ -3,6 +3,8 @@ package com.backend.StudentTipMaster.handler;
 import com.backend.StudentTipMaster.response.ExceptionResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.MessageExceptionHandler;
+import org.springframework.messaging.simp.annotation.SendToUser;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.AuthenticationException;
@@ -25,13 +27,6 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ExceptionResponse> handleUsernameNotFoundException(UsernameNotFoundException ex, WebRequest request) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ExceptionResponse.builder()
                         .exceptionMessage(ex.getMessage())
-                .build());
-    }
-
-    @ExceptionHandler(RoomNameAlreadyExitsException.class)
-    public ResponseEntity<ExceptionResponse> handleRoomNameAlreadyExitsException(RoomNameAlreadyExitsException ex, WebRequest request) {
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(ExceptionResponse.builder()
-                .exceptionMessage(ex.getMessage())
                 .build());
     }
 

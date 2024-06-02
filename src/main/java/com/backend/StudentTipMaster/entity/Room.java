@@ -19,11 +19,16 @@ import java.util.UUID;
 public class Room {
     @Id
     @UuidGenerator
-    private UUID id;
+    private UUID roomId;
     @Column(unique=true, nullable = false)
     private String roomName;
     private String owner;
     @ManyToMany(fetch = FetchType.EAGER)
     private List<User> users;
     private List<String> temporaryUsers;
+
+    //TODO
+    //@CreatedDate
+    //@Column(name = "created_at", nullable = false, updatable = false)
+    //private Date createdAt;
 }

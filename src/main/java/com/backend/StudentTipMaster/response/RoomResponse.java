@@ -13,9 +13,9 @@ import java.util.UUID;
 @NoArgsConstructor
 @Builder
 public class RoomResponse {
-    private UUID id;
+    private UUID roomId;
     private String roomName;
     private String owner;
-    private List<User> users;
+    private List<UserDto> users;
     private List<String> temporaryUsers;
 }

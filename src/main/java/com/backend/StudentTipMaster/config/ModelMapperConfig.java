@@ -1,9 +1,6 @@
 package com.backend.StudentTipMaster.config;
 
-import com.backend.StudentTipMaster.mapper.CreateRoomMessageToRoom;
-import com.backend.StudentTipMaster.mapper.RegisterRequestToUser;
-import com.backend.StudentTipMaster.mapper.RoomToResponseRoom;
-import com.backend.StudentTipMaster.mapper.UserToRegisterResponse;
+import com.backend.StudentTipMaster.mapper.*;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
@@ -23,7 +20,7 @@ public class ModelMapperConfig {
         modelMapper.addConverter(registerRequestToUser);
         modelMapper.addConverter(userToRegisterResponse);
         modelMapper.addConverter(createRoomMessageToRoom);
-        modelMapper.addMappings(roomToResponseRoom);
+        modelMapper.addConverter(roomToResponseRoom);
         return modelMapper;
     }
 }
