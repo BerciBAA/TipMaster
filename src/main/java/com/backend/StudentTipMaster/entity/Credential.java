@@ -18,6 +18,7 @@ public class Credential extends Audit {
     @Id
     @UuidGenerator
     private UUID id;
+    @Column(unique = true)
     private String email;
     private String password;
     private int trackPoint;

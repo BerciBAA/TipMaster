@@ -1,5 +1,6 @@
 package com.backend.StudentTipMaster.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -19,6 +20,7 @@ public class Rank extends Audit {
     @Id
     @UuidGenerator
     private UUID id;
+    @Column(unique = true)
     private String rankName;
     private Integer rankLimit;
 }

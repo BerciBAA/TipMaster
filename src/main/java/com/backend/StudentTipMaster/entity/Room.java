@@ -20,11 +20,12 @@ public class Room  extends Audit {
     @Id
     @UuidGenerator
     private UUID roomId;
+
     @Column(unique=true, nullable = false)
     private String roomName;
 
     @ManyToOne
-    @JoinColumn(name = "owner_id")
+    @JoinColumn(name = "owner_id", nullable = false)
     private User owner;
 
     @ManyToMany
