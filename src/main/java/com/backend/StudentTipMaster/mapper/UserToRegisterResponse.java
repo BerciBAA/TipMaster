@@ -24,7 +24,7 @@ public class UserToRegisterResponse implements Converter<User, RegisterResponse>
         User source = mappingContext.getSource();
         RegisterResponse destination = new RegisterResponse();
         destination.setUsername(source.getUsername());
-        destination.setEmail(source.getEmail());
+        destination.setEmail(source.getCredential().getEmail());
         destination.setRoles(source.getRoles().stream().map(Role::getRole).collect(Collectors.toSet()));
 
         return destination;

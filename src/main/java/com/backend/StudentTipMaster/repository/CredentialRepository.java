@@ -1,2 +1,12 @@
-package com.backend.StudentTipMaster.repository;public interface CredentialRepository {
+package com.backend.StudentTipMaster.repository;
+
+import com.backend.StudentTipMaster.entity.Credential;
+import com.backend.StudentTipMaster.entity.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.Optional;
+import java.util.UUID;
+
+public interface CredentialRepository extends JpaRepository<Credential, UUID> {
+    Optional<Credential> findByEmail(String email);
 }

@@ -1,22 +1,20 @@
 package com.backend.StudentTipMaster.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.time.Instant;
 import java.util.UUID;
 
 @Entity
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Table(name = "refresh_token_table")
-public class RefreshToken {
+public class RefreshToken  extends Audit  {
 
     @Id
     @UuidGenerator

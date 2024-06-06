@@ -26,12 +26,12 @@ public class UserServiceDetailsImpl implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("Nincs regisztrálva ilyen felhasználó."));
 
         List<GrantedAuthority> authorities = user.getRoles().stream()
-                .map(role -> new SimpleGrantedAuthority(role.getRole()))
+                .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getRole()))
                 .collect(Collectors.toList());
 
         return CustomUserDetails.builder()
                 .username(user.getUsername())
-                .password(user.getPassword())
+                .password(user.getCredential().getPassword())
                 .authorities(authorities)
                 .build();
     }

@@ -16,19 +16,22 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "room_table")
-public class Room {
+public class Room  extends Audit {
     @Id
     @UuidGenerator
     private UUID roomId;
     @Column(unique=true, nullable = false)
     private String roomName;
-    private String owner;
-    @ManyToMany(fetch = FetchType.EAGER)
-    private List<User> users;
-    private List<String> temporaryUsers;
 
-    //TODO
-    //@CreatedDate
-    //@Column(name = "created_at", nullable = false, updatable = false)
-    //private Date createdAt;
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
+    private User owner;
+
+    @ManyToMany
+    @JoinTable(
+            name = "room_members",
+            joinColumns = @JoinColumn(name = "room_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private List<User> members;
 }

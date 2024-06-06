@@ -20,12 +20,11 @@ public class RoomToResponseRoom  implements Converter<Room, RoomResponse> {
         Room source = mappingContext.getSource();
         RoomResponse destination = new RoomResponse();
         destination.setRoomId(source.getRoomId());
-        destination.setOwner(source.getOwner());
-        destination.setTemporaryUsers(source.getTemporaryUsers());
-        if(source.getUsers() != null){
-            List<UserDto> users = source.getUsers().stream()
+        destination.setOwner(source.getOwner().getUsername());
+        if(source.getMembers()!= null){
+            List<UserDto> users = source.getMembers().stream()
                     .map(user -> UserDto.builder()
-                            .email(user.getEmail())
+                            .email(user.getCredential().getEmail())
                             .username(user.getUsername())
                             .roles(user.getRoles().stream()
                                     .map(Role::getRole)

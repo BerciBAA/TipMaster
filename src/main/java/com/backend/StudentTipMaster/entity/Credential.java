@@ -1,16 +1,24 @@
 package com.backend.StudentTipMaster.entity;
 
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
+import lombok.*;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.util.UUID;
 
 @Entity
-public class CredentialTable extends Audit {
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Table(name = "credential_table")
+public class Credential extends Audit {
+    @Id
+    @UuidGenerator
     private UUID id;
     private String email;
     private String password;
-
     private int trackPoint;
-    
 }

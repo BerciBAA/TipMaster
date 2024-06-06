@@ -20,18 +20,24 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "user_table")
-public class User {
+public class User  extends Audit {
 
     @Id
     @UuidGenerator
     private UUID id;
+
     @Column(unique=true, nullable = false)
     private String username;
-    @Column(unique=true, nullable = false)
-    private String email;
-    @Column(nullable = false)
-    private String password;
-    @Column(nullable = false)
+
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles = new HashSet<>();
+
+    @OneToOne
+    private Credential credential;
+
+    @OneToMany(mappedBy = "owner")
+    private List<Room> ownedRooms;
+
+    @ManyToMany(mappedBy = "members")
+    private List<Room> rooms;
 }

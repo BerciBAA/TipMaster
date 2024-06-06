@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class TestController {
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/admin")
     public ResponseEntity<String> adminTest(){
         return ResponseEntity.ok().body("adminTest");
     }
 
-    @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @GetMapping("/user")
     public ResponseEntity<String> userTest(){
         return ResponseEntity.ok().body("userTest");
