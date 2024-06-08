@@ -64,6 +64,11 @@ public class InitDatabase implements CommandLineRunner {
         userAdmin.setRoles(Set.of(userRole, adminRole));
         credentialRepository.save(userAdmin.getCredential());
         userRepository.save(userAdmin);
+
+        User temporaryUser = new User();
+        temporaryUser.setUsername("temporaryUser");
+        userRepository.save(temporaryUser);
+
     }
 
     private void initRoles(){

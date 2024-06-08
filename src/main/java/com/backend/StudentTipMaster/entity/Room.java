@@ -28,7 +28,7 @@ public class Room  extends Audit {
     @JoinColumn(name = "owner_id", nullable = false)
     private User owner;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "room_members",
             joinColumns = @JoinColumn(name = "room_id"),

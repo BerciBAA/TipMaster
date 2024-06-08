@@ -15,7 +15,6 @@ import java.util.UUID;
 public class RoomResponse {
     private UUID roomId;
     private String roomName;
-    private String owner;
-    private List<UserDto> users;
-    private List<String> temporaryUsers;
+    private UserDto owner;
+    private List<UserDto> members;
 }

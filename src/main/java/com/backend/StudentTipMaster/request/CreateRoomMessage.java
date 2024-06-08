@@ -16,5 +16,4 @@ public class CreateRoomMessage {
     @NotNull(message = "A szoba név nem lehet null")
     private String roomName;
     private UUID userId;
-    private String temporaryUsername;
 }

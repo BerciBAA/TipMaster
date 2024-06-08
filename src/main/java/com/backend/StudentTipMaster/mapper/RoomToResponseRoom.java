@@ -20,18 +20,21 @@ public class RoomToResponseRoom  implements Converter<Room, RoomResponse> {
         Room source = mappingContext.getSource();
         RoomResponse destination = new RoomResponse();
         destination.setRoomId(source.getRoomId());
-        destination.setOwner(source.getOwner().getUsername());
+        UserDto owner = new UserDto();
+        owner.setId(source.getOwner().getId());
+        owner.setUsername(source.getOwner().getUsername());
+        owner.setRoles(source.getOwner().getRoles().stream().map(Role::getRole).collect(Collectors.toSet()));
+        destination.setOwner(owner);
         if(source.getMembers()!= null){
-            List<UserDto> users = source.getMembers().stream()
+            List<UserDto> members = source.getMembers().stream()
                     .map(user -> UserDto.builder()
-                            .email(user.getCredential().getEmail())
                             .username(user.getUsername())
                             .roles(user.getRoles().stream()
                                     .map(Role::getRole)
                                     .collect(Collectors.toSet()))
                             .build())
-                    .collect(Collectors.toList());
-            destination.setUsers(users);
+                    .toList();
+            destination.setMembers(members);
         }
         destination.setRoomName(source.getRoomName());
 
