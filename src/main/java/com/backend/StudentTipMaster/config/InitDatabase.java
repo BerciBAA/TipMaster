@@ -1,7 +1,9 @@
 package com.backend.StudentTipMaster.config;
 
+import com.backend.StudentTipMaster.entity.Credential;
 import com.backend.StudentTipMaster.entity.Role;
 import com.backend.StudentTipMaster.entity.User;
+import com.backend.StudentTipMaster.repository.CredentialRepository;
 import com.backend.StudentTipMaster.repository.RoleRepository;
 import com.backend.StudentTipMaster.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,7 @@ public class InitDatabase implements CommandLineRunner {
     private final RoleRepository roleRepository;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final CredentialRepository credentialRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -37,24 +40,35 @@ public class InitDatabase implements CommandLineRunner {
 
         User admin = new User();
         admin.setUsername("admin");
-        admin.setEmail("admin@admin.hu");
-        admin.setPassword(passwordEncoder.encode("admin"));
+        admin.setCredential(new Credential());
+        admin.getCredential().setEmail("admin@admin.hu");
+        admin.getCredential().setPassword(passwordEncoder.encode("admin"));
         admin.setRoles(Set.of(adminRole));
+        credentialRepository.save(admin.getCredential());
         userRepository.save(admin);
 
         User user = new User();
         user.setUsername("user");
-        user.setEmail("user@user.hu");
-        user.setPassword(passwordEncoder.encode("user"));
+        user.setCredential(new Credential());
+        user.getCredential().setEmail("user@user.hu");
+        user.getCredential().setPassword(passwordEncoder.encode("user"));
         user.setRoles(Set.of(userRole));
+        credentialRepository.save(user.getCredential());
         userRepository.save(user);
 
         User userAdmin = new User();
         userAdmin.setUsername("useradmin");
-        userAdmin.setEmail("useradmin@useradmin.hu");
-        userAdmin.setPassword(passwordEncoder.encode("useradmin"));
+        userAdmin.setCredential(new Credential());
+        userAdmin.getCredential().setEmail("useradmin@useradmin.hu");
+        userAdmin.getCredential().setPassword(passwordEncoder.encode("useradmin"));
         userAdmin.setRoles(Set.of(userRole, adminRole));
+        credentialRepository.save(userAdmin.getCredential());
         userRepository.save(userAdmin);
+
+        User temporaryUser = new User();
+        temporaryUser.setUsername("temporaryUser");
+        userRepository.save(temporaryUser);
+
     }
 
     private void initRoles(){

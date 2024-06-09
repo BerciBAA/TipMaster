@@ -24,7 +24,7 @@ public class CustomUserDetails implements UserDetails {
 
     public CustomUserDetails(User user) {
         this.username = user.getUsername();
-        this.password= user.getPassword();
+        this.password= user.getCredential().getPassword();
         List<GrantedAuthority> auths = new ArrayList<>();
 
         for(Role role : user.getRoles()){
